@@ -1,0 +1,6 @@
+FROM node
+RUN mkdir -p /var/www
+VOLUME /var/www
+WORKDIR /var/www
+RUN npm install -g express-generator
+EXPOSE 3001
