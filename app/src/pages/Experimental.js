@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 class Experimental extends Component {
     constructor(){
         super();
-        this.state = {time: new Date().getTime(), users: []}
+        this.state = {time: new Date().getTime(), users: [], updated: false}
         this.handleClick = this.handleClick.bind(this);
     }
     componentWillMount(){
@@ -15,15 +15,17 @@ class Experimental extends Component {
     componentWillUnmount(){
         console.log('this unmount');
     }
-    shouldComponentUpdate(){
-        console.log('this should update' + this.state.time % 2);
-        return this.state.time % 2;
+    shouldComponentUpdate() {
+        if (this.state.updated) {
+            return false;
+        }
+        this.setState({updated: true});
+        return true;
     }
     componentWillUpdate(){
-        console.log('this will update');
-        fetch('/users')
+        fetch('http://localhost:3001/api/users',{accept: 'application/json',})
             .then(res => res.json())
-            .then(users => this.setState({users}));
+            .then(users => this.setState({ users: users }));
     }
     handleClick(e){
         e.preventDefault();
@@ -32,11 +34,18 @@ class Experimental extends Component {
         });
     }
 
+    renderUsers = () => {
+        return this.state.users.map((user) => {
+            return <li key={user.id}>{user.username}</li>
+        });
+    }
+
     render(){
         return (
             <div>
                 <h2>experimantal {this.state.time.toString()}</h2>
                 <a href="" onClick={this.handleClick}>update</a>
+                {this.renderUsers()}
             </div>
         )
     }
