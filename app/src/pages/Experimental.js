@@ -8,6 +8,13 @@ class Experimental extends Component {
     }
     componentWillMount(){
         console.log('component will mount');
+        this.setState({updated: true});
+
+    }
+    getUsers = () => {
+        fetch(process.env.REACT_APP_BASE_URL + '/api/users',{accept: 'application/json',})
+            .then(res => res.json())
+            .then(users => this.setState({ users: users }));
     }
     componentDidMount(){
         console.log('component did mount');
@@ -16,16 +23,10 @@ class Experimental extends Component {
         console.log('this unmount');
     }
     shouldComponentUpdate() {
-        if (this.state.updated) {
-            return false;
-        }
-        this.setState({updated: true});
         return true;
     }
     componentWillUpdate(){
-        fetch('http://localhost:3001/api/users',{accept: 'application/json',})
-            .then(res => res.json())
-            .then(users => this.setState({ users: users }));
+
     }
     handleClick(e){
         e.preventDefault();
