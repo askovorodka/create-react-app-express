@@ -13,6 +13,7 @@ class Header extends Component {
                         <li><Link to="/catalog">Catalog</Link></li>
                         <li><Link to="/catalog/1">Catalog by id #1</Link></li>
                         <li><Link to="/experimental">Experimental</Link></li>
+                        <li><Link to="/skins">Skins</Link></li>
                     </ul>
                 </nav>
             </header>

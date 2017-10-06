@@ -4,6 +4,7 @@ import Hello from '../pages/Hello'
 import Test from '../pages/Test'
 import CatalogList from '../pages/CatalogList'
 import Experimental from '../pages/Experimental'
+import Skins from '../pages/Skins'
 
 class Main extends Component {
     render() {
@@ -15,6 +16,7 @@ class Main extends Component {
                 <Route exact path="/catalog" component={CatalogList}/>
                 <Route path="/catalog/:number" component={CatalogList}/>
                 <Route path="/experimental" component={Experimental}/>
+                <Route path="/skins" component={Skins}/>
             </Switch>
         )
     }
